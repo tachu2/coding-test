@@ -22,8 +22,10 @@
    - メールアドレス変更時は確認メールを送信
 
 ## 注意点
-- database.hとmailer.hは修正しないこと。
+- database.cppとmailer.cppは修正しないこと。
+  - ただしdatabase.cppの中で参照するUserは変えていい(model/user.hで定義されているUserである必要はないので、includeを変えることができる)
 - これらは本物のdbと外部のメールサービスとして扱うこと
+- fileの場所を変えることは許可します
 
 ## ビルドと実行
 

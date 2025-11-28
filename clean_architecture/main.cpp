@@ -14,7 +14,8 @@ int main() {
     UserController controller(&db, &mailer);
     
     // テストユーザー作成
-    User user = db.create_user("山田太郎", "yamada@example.com", "090-1234-5678");
+    User new_user(1, "山田太郎", "yamada@example.com", "090-1234-5678");
+    User user = db.create_user(new_user);
     cout << "ユーザー作成: ID=" << user.id << ", " << user.name << ", " << user.email << endl << endl;
     
     // 電話番号更新
