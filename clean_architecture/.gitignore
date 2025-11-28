@@ -7,8 +7,3 @@ user_update
 *.o
 *.obj
 
-# IDEファイル
-.vscode/
-.idea/
-*.swp
-*.swo
