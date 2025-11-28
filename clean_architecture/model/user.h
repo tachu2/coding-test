@@ -7,7 +7,6 @@ using namespace std;
 using namespace std::chrono;
 
 // ユーザー情報を表す構造体
-// 問題点：ただのデータ構造で、ドメインロジックが含まれていない
 struct User {
     int id;
     string name;

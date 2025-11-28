@@ -10,7 +10,7 @@ int main() {
     
     // 初期化
     Database db;
-    Mailer mailer("smtp.example.com", 587, "noreply@example.com");
+    Mailer mailer;
     UserController controller(&db, &mailer);
     
     // テストユーザー作成

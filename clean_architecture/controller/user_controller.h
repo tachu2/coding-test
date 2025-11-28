@@ -2,7 +2,6 @@
 #include "../model/user.h"
 #include "../database/database.h"
 #include "../mailer/mailer.h"
-#include <vector>
 #include <stdexcept>
 #include <cctype>
 
@@ -10,18 +9,16 @@ using namespace std;
 using namespace std::chrono;
 
 // ユーザー更新処理を行うコントローラー
-// 問題点：全てのロジックがここに詰め込まれている
 class UserController {
 private:
-    Database* db;      // 問題点：具象クラスに依存
-    Mailer* mailer;    // 問題点：具象クラスに依存
+    Database* db;
+    Mailer* mailer;
 
 public:
     UserController(Database* database, Mailer* mail)
         : db(database), mailer(mail) {}
     
     // ユーザー情報を更新する
-    // 問題点：バリデーション、ビジネスルール、DB保存、メール送信が全てここに書かれている
     User update_user(int user_id, const UpdateUserRequest& request) {
         // ユーザーを取得
         User* user = db->find_user_by_id(user_id);
@@ -29,7 +26,6 @@ public:
             throw runtime_error("User not found");
         }
         
-        vector<string> changed_fields;
         bool has_important_change = false;
         
         // 名前の更新
@@ -64,7 +60,6 @@ public:
             
             user->name = new_name;
             user->last_name_update = system_clock::now();
-            changed_fields.push_back("名前");
             has_important_change = true;
         }
         
@@ -89,27 +84,24 @@ public:
             
             user->email = new_email;
             user->last_email_update = system_clock::now();
-            changed_fields.push_back("メールアドレス");
             has_important_change = true;
             
             // 旧メールアドレスに確認メール送信（コントローラーから直接呼び出し）
-            mailer->send_email_change_confirmation(old_email, new_email);
+            mailer->send_email_change_confirmation(old_email);
         }
         
         // 電話番号の更新
         if (request.phone.has_value()) {
             user->phone = request.phone.value();
             user->last_phone_update = system_clock::now();
-            changed_fields.push_back("電話番号");
         }
         
         // DB保存（コントローラーから直接呼び出し）
         db->update_user(*user);
         
         // 更新通知メール送信（コントローラーで判断して送信）
-        // 問題点：通知の判断ロジックがコントローラーにある
         if (has_important_change) {
-            mailer->send_update_notification(user->email, changed_fields);
+            mailer->send_update_notification(user->email);
         }
         
         return *user;

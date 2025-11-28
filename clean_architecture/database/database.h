@@ -6,8 +6,8 @@
 
 using namespace std;
 
-// オンメモリのデータベース
-// 問題点：具象クラスで、インターフェースが定義されていない
+// データベース
+// Warning: 本当のDBとして扱うこと
 class Database {
 private:
     map<int, User> users;
