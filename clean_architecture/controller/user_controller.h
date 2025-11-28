@@ -1,7 +1,7 @@
 #pragma once
 #include "../model/user.h"
-#include "../database/database.h"
-#include "../mailer/mailer.h"
+#include "../database/database.cpp"
+#include "../mailer/mailer.cpp"
 #include <stdexcept>
 #include <cctype>
 

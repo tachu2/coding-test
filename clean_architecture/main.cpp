@@ -1,6 +1,6 @@
 #include <iostream>
-#include "database/database.h"
-#include "mailer/mailer.h"
+#include "database/database.cpp"
+#include "mailer/mailer.cpp"
 #include "controller/user_controller.h"
 
 using namespace std;
@@ -65,8 +65,7 @@ int main() {
     }
     cout << endl;
     
-    // ビジネスルール違反（名前の再変更）
-    cout << "5. ビジネスルール違反（名前の再変更）" << endl;
+    // 名前の再変更
     try {
         UpdateUserRequest req;
         req.name = "田中一郎";
