@@ -32,7 +32,6 @@ public:
         if (request.name.has_value()) {
             string new_name = request.name.value();
             
-            // バリデーション（コントローラーで実施）
             if (new_name.empty()) {
                 throw runtime_error("Name cannot be empty");
             }
@@ -49,7 +48,6 @@ public:
                 throw runtime_error("Name cannot be only numbers");
             }
             
-            // ビジネスルール：名前変更は90日に1回まで（コントローラーで実施）
             auto days_since_last_change = duration_cast<hours>(
                 system_clock::now() - user->last_name_update
             ).count() / 24;
@@ -68,12 +66,10 @@ public:
             string new_email = request.email.value();
             string old_email = user->email;
             
-            // バリデーション（コントローラーで実施）
             if (new_email.find('@') == string::npos) {
                 throw runtime_error("Invalid email format");
             }
             
-            // ビジネスルール：メールアドレス変更は30日に1回まで（コントローラーで実施）
             auto days_since_last_change = duration_cast<hours>(
                 system_clock::now() - user->last_email_update
             ).count() / 24;
@@ -86,7 +82,6 @@ public:
             user->last_email_update = system_clock::now();
             has_important_change = true;
             
-            // 旧メールアドレスに確認メール送信（コントローラーから直接呼び出し）
             mailer->send_email_change_confirmation(old_email);
         }
         
@@ -96,10 +91,8 @@ public:
             user->last_phone_update = system_clock::now();
         }
         
-        // DB保存（コントローラーから直接呼び出し）
         db->update_user(*user);
         
-        // 更新通知メール送信（コントローラーで判断して送信）
         if (has_important_change) {
             mailer->send_update_notification(user->email);
         }
