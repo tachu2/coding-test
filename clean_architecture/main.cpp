@@ -1,7 +1,7 @@
 #include <iostream>
-#include "database.h"
-#include "mailer.h"
-#include "user_controller.h"
+#include "database/database.h"
+#include "mailer/mailer.h"
+#include "controller/user_controller.h"
 
 using namespace std;
 

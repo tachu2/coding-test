@@ -38,3 +38,4 @@ public:
              << new_email << endl;
     }
 };
+

@@ -9,7 +9,7 @@ TARGET = a.out
 SOURCES = main.cpp
 
 # ヘッダーファイル
-HEADERS = user.h database.h mailer.h user_controller.h
+HEADERS = model/user.h database/database.h mailer/mailer.h controller/user_controller.h
 
 # デフォルトターゲット
 all: $(TARGET)

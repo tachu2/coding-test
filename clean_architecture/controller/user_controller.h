@@ -1,11 +1,12 @@
 #pragma once
-#include "user.h"
-#include "database.h"
-#include "mailer.h"
+#include "../model/user.h"
+#include "../database/database.h"
+#include "../mailer/mailer.h"
 #include <vector>
 #include <stdexcept>
 #include <cctype>
 
+using namespace std;
 using namespace std::chrono;
 
 // ユーザー更新処理を行うコントローラー
@@ -114,3 +115,4 @@ public:
         return *user;
     }
 };
+

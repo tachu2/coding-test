@@ -1,8 +1,10 @@
 #pragma once
-#include "user.h"
+#include "../model/user.h"
 #include <map>
 #include <memory>
 #include <stdexcept>
+
+using namespace std;
 
 // オンメモリのデータベース
 // 問題点：具象クラスで、インターフェースが定義されていない
@@ -42,3 +44,4 @@ public:
         }
     }
 };
+

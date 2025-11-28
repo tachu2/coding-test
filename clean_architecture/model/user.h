@@ -41,3 +41,4 @@ struct UpdateUserRequest {
     optional<string> email;
     optional<string> phone;
 };
+
