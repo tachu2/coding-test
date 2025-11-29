@@ -1,4 +1,6 @@
 #include <iostream>
+#include <map>
+#include <string>
 #include "database/database.cpp"
 #include "mailer/mailer.cpp"
 #include "controller/user_controller.h"
@@ -14,16 +16,20 @@ int main() {
     UserController controller(&db, &mailer);
     
     // テストユーザー作成
-    User new_user(1, "山田太郎", "yamada@example.com", "090-1234-5678");
-    User user = db.create_user(new_user);
-    cout << "ユーザー作成: ID=" << user.id << ", " << user.name << ", " << user.email << endl << endl;
+    map<string, string> new_user;
+    new_user["id"] = "1";
+    new_user["name"] = "山田太郎";
+    new_user["email"] = "yamada@example.com";
+    new_user["phone"] = "090-1234-5678";
+    map<string, string> user = db.create_user(new_user);
+    cout << "ユーザー作成: ID=" << user["id"] << ", " << user["name"] << ", " << user["email"] << endl << endl;
     
     // 電話番号更新
     cout << "1. 電話番号更新" << endl;
     try {
         UpdateUserRequest req;
         req.phone = "090-9999-8888";
-        controller.update_user(user.id, req);
+        controller.update_user(user["id"], req);
         cout << "✓ 更新成功" << endl;
     } catch (const exception& e) {
         cout << "✗ エラー: " << e.what() << endl;
@@ -35,7 +41,7 @@ int main() {
     try {
         UpdateUserRequest req;
         req.name = "山田花子";
-        controller.update_user(user.id, req);
+        controller.update_user(user["id"], req);
         cout << "✓ 更新成功" << endl;
     } catch (const exception& e) {
         cout << "✗ エラー: " << e.what() << endl;
@@ -47,7 +53,7 @@ int main() {
     try {
         UpdateUserRequest req;
         req.email = "hanako@example.com";
-        controller.update_user(user.id, req);
+        controller.update_user(user["id"], req);
         cout << "✓ 更新成功" << endl;
     } catch (const exception& e) {
         cout << "✗ エラー: " << e.what() << endl;
@@ -59,7 +65,7 @@ int main() {
     try {
         UpdateUserRequest req;
         req.name = "";
-        controller.update_user(user.id, req);
+        controller.update_user(user["id"], req);
         cout << "✓ 更新成功" << endl;
     } catch (const exception& e) {
         cout << "✗ エラー: " << e.what() << endl;
@@ -70,7 +76,7 @@ int main() {
     try {
         UpdateUserRequest req;
         req.name = "田中一郎";
-        controller.update_user(user.id, req);
+        controller.update_user(user["id"], req);
         cout << "✓ 更新成功" << endl;
     } catch (const exception& e) {
         cout << "✗ エラー: " << e.what() << endl;
