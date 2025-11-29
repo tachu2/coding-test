@@ -7,6 +7,7 @@ using namespace std;
 
 // データベース
 // Warning: 本当のDBとして扱うこと
+// これらのメソッドを呼ぶとDB上にデータが永続化されるもとのして扱うこと
 class Database {
 private:
     map<string, map<string, string>> users;

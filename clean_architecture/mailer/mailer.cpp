@@ -4,8 +4,8 @@
 
 using namespace std;
 
-// メール送信を担当するクラス
-// Warning: このクラスのメソッドを呼ぶと本当にユーサーにメールが送信される
+// メール送信サービス
+// Warning: このクラスのメソッドを呼ぶと本当にユーサーにメールが送信されるので外部APIとして扱うこと
 class Mailer {
 public:
     Mailer() {}
